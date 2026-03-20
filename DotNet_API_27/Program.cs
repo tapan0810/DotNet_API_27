@@ -12,6 +12,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ClassDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

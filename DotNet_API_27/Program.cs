@@ -1,5 +1,6 @@
 using DotNet_API_27.Data;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapSclarApiReference();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();

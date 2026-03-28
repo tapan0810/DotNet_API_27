@@ -1,23 +1,26 @@
-using DotNet_API_27.Data;
+﻿using DotNet_API_27.Data;
+using DotNet_API_27.Helper;
+using DotNet_API_27.Service;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<ClassDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// 🔹 Services
+builder.Services.AddScoped<IClassService, ClassService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtHelper, JwtHelper>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -25,7 +28,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

@@ -8,5 +8,6 @@ namespace DotNet_API_27.Data
         public ClassDbContext(DbContextOptions<ClassDbContext> options) : base(options) { }
 
         public DbSet<Class> Classes => Set<Class>();
+        public DbSet<User> Users => Set<User>();
     }
 }
